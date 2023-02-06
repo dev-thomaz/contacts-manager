@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { handleDismissModal } from "../../features/modal/modal-slice";
-import { Container, FormContainer, InputsArea, ModalActionButton, ModalContainer, ModalFooter } from "./styles";
+import { Container, FormContainer, InputsArea, InputTitle, ModalActionButton, ModalContainer, ModalFooter } from "./styles";
 import { defaultTheme } from "../../styles/themes/default";
 import { ContactState, handleClearContactSelected, handleCreateNewContact, handleEditContact } from "../../features/contact/contact-slice";
 import { useAppSelector } from "../../hooks";
@@ -22,7 +22,6 @@ export function Modal({ showModal = false, type }: ModalProps) {
     const segments = useAppSelector((state: RootState) => state.segments)
     const dispatch = useDispatch()
     const [nameField, setNameField] = useState('');
-    const [surnameField, setSurameField] = useState('');
     const [emailField, setEmailField] = useState('');
     const [groupField, setGroupField] = useState(segments[0].value);
 
@@ -34,7 +33,6 @@ export function Modal({ showModal = false, type }: ModalProps) {
         if (type === 'edit') {
             const { contact } = contacts;
             setNameField(contact.name)
-            contact.surname && setSurameField(contact.surname)
             setEmailField(contact.email)
             setGroupField(contact.group)
             
@@ -46,7 +44,6 @@ export function Modal({ showModal = false, type }: ModalProps) {
     function handleSubmitContact() {
         const payload = {
            name: nameField, 
-           surname: surnameField,
            group: groupField,
            email: emailField
         } as ContactState
@@ -54,7 +51,6 @@ export function Modal({ showModal = false, type }: ModalProps) {
         dispatch(handleCreateNewContact(payload))
         dispatch(handleDismissModal());
         setNameField('')
-        setSurameField('')
         setEmailField('')
         setGroupField('')
     }
@@ -62,7 +58,6 @@ export function Modal({ showModal = false, type }: ModalProps) {
     function handleEditContactSubmit() {
         const payload = {
             name: nameField, 
-            surname: surnameField,
             group: groupField,
             email: emailField
          } as ContactState
@@ -76,13 +71,12 @@ export function Modal({ showModal = false, type }: ModalProps) {
         dispatch(handleDismissModal())
         dispatch(handleClearContactSelected())
         setNameField('')
-        setSurameField('')
         setEmailField('')
         setGroupField('')
     }
 
     function disableButtonRule() {
-        return (nameField === '' || surnameField === '' || emailField === '' )
+        return (nameField === ''  || emailField === '' )
     }
 
     return (
@@ -94,13 +88,12 @@ export function Modal({ showModal = false, type }: ModalProps) {
 
                 <FormContainer onSubmit={type === 'create' ? handleSubmitContact : handleEditContactSubmit}>
                     <InputsArea>
-                        <span>nome</span>
+                    
+                        <InputTitle>Nome</InputTitle>
                         <input type="text" placeholder="Nome" name="name" value={nameField} onChange={e => setNameField(e.target.value)} />
-                        <span>sobrenome</span>
-                        <input type="text" placeholder="Sobrenome" name="surname" value={surnameField} onChange={e => setSurameField(e.target.value)} />
-                        <span>email</span>
+                        <InputTitle>Email</InputTitle>
                         <input type="text" placeholder="email" name="email" value={emailField} onChange={e => setEmailField(e.target.value)} />
-                        <span>grupo</span>
+                        <InputTitle>Grupo</InputTitle>
                         <select  value={groupField} name="group" onChange={e => setGroupField(e.target.value)} >
                                    {segments.map((segment) => {
                                     const {value, label} = segment

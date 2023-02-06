@@ -61,14 +61,13 @@ export function Home() {
 
                     {contacts.filteredContacts.length > 0 ?
                         contacts.filteredContacts.map((contact: ContactState) => {
-                            const { name, email, id, surname } = contact
+                            const { name, email, id } = contact
                             return (
                                 <Contact
                                     name={name}
                                     email={email}
                                     key={id}
                                     id={id}
-                                    surname={surname}
                                     picture={`https://xsgames.co/randomusers/assets/avatars/pixel/${id}.jpg`}
                                 />
                             )

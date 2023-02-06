@@ -101,6 +101,12 @@ display:flex;
 flex-direction:column;
 width:100%;
 align-items:center;
-gap:1rem;
+gap:0.5rem;
 margin:2rem 0 0 0;
+`
+
+export const InputTitle = styled.div`
+display:flex;
+width:85%;
+font-weight:500;
 `

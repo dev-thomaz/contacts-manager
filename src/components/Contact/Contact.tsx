@@ -9,9 +9,8 @@ type ContactProps = {
     group?: string;
     picture?: string;
     id?:number;
-    surname?: string;
 }
-export function Contact({name = 'Nome', email = 'email', group = 'ativos', picture = 'https://xsgames.co/randomusers/avatar.php?g=male', id= 0, surname = ''}: ContactProps){
+export function Contact({name = 'Nome', email = 'email', group = 'ativos', picture = 'https://xsgames.co/randomusers/avatar.php?g=male', id= 0}: ContactProps){
     const dispatch = useDispatch()
     function handleCLickEdit(){
         const contact: ContactState = {
@@ -29,7 +28,7 @@ export function Contact({name = 'Nome', email = 'email', group = 'ativos', pictu
         <img src={picture} alt="" />
         </ContactImg>
         <ContactName>
-            <span> {name} {surname} </span>
+            <span> {name}  </span>
             <span> {email} </span>
         </ContactName>
 

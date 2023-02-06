@@ -2,7 +2,6 @@ import { createSlice, current, PayloadAction, } from "@reduxjs/toolkit"
 
 export interface ContactState {
     name: string,
-    surname?: string,
     email: string,
     group: string,
     id?: number,
@@ -28,11 +27,6 @@ export const contactSlice = createSlice({
                 nameWords[i] = nameWords[i][0].toUpperCase() + nameWords[i].slice(1);
             }
             newContact.name = nameWords.join(' ')
-            const surnameWords = newContact.surname ? newContact.surname.split(' ') : []
-            for (let i = 0; i < surnameWords.length; i++) {
-                surnameWords[i] = surnameWords[i][0].toUpperCase() + surnameWords[i].slice(1);
-            }
-            newContact.surname = newContact.surname ? surnameWords.join(' ')  : '';
             newContact.id = state.contacts.length + 1
             state.contacts.push(payload)
             localStorage.setItem('@contactManager:CONTACTS', JSON.stringify([]))
@@ -55,11 +49,6 @@ export const contactSlice = createSlice({
                 nameWords[i] = nameWords[i][0].toUpperCase() + nameWords[i].slice(1);
             }
             contactpayload.name = nameWords.join(' ')
-            const surnameWords = contactpayload.surname ? contactpayload.surname.split(' ') : []
-            for (let i = 0; i < surnameWords.length; i++) {
-                surnameWords[i] = surnameWords[i][0].toUpperCase() + surnameWords[i].slice(1);
-            }
-            contactpayload.surname = contactpayload.surname ? surnameWords.join(' ')  : '';
             contactpayload.id = state.contact.id;
            const i = state.contacts.findIndex((contact) => contact.id === contactpayload.id) 
            state.contacts[i] = contactpayload;
@@ -69,11 +58,11 @@ export const contactSlice = createSlice({
         handleCreateMockupContacts: (state) => {
             const contactsStateStorage = localStorage.getItem('@contactManager:CONTACTS')
             if (!contactsStateStorage?.length) {
-            [{ name: 'Thomaz', surname: 'Bittencourt', email: 'dev.thomaz@gmail.com', group: 'active', id: 1 },
-            { name: 'Theo', surname: 'Arena', email: 'theo.arena@evolutto.com', group: 'active', id: 3 },
-            { name: 'Omar', surname: 'Alves', email: 'omar.alves@evolutto.com', group: 'active', id: 2 },
-            { name: 'Taciane', surname: 'Franca', email: 'taciane.franca@talentgroup.com.br', group: 'active', id: 5 },
-            { name: 'Marines', surname: 'Artigas', email: 'marines.artigas@templum.com.br', group: 'active', id: 4 },].map((contact) => {
+            [{ name: 'Thomaz Bittencourt', email: 'dev.thomaz@gmail.com', group: 'active', id: 1 },
+            { name: 'Theo Arena', email: 'theo.arena@evolutto.com', group: 'active', id: 3 },
+            { name: 'Omar Alves', email: 'omar.alves@evolutto.com', group: 'active', id: 2 },
+            { name: 'Taciane Franca', email: 'taciane.franca@talentgroup.com.br', group: 'active', id: 5 },
+            { name: 'Marines Artigas', email: 'marines.artigas@templum.com.br', group: 'active', id: 4 },].map((contact) => {
                 state.contacts.push(contact)
             })
                 localStorage.setItem('@contactManager:CONTACTS', JSON.stringify(state.contacts))
