@@ -72,6 +72,7 @@ export const contactSlice = createSlice({
             [{ name: 'Thomaz', surname: 'Bittencourt', email: 'dev.thomaz@gmail.com', group: 'active', id: 1 },
             { name: 'Theo', surname: 'Arena', email: 'theo.arena@evolutto.com', group: 'active', id: 3 },
             { name: 'Omar', surname: 'Alves', email: 'omar.alves@evolutto.com', group: 'active', id: 2 },
+            { name: 'Taciana', surname: 'Nascimento', email: 'omar.alves@evolutto.com', group: 'active', id: 5 },
             { name: 'Marines', surname: 'Artigas', email: 'marines.artigas@templum.com.br', group: 'active', id: 4 },].map((contact) => {
                 state.contacts.push(contact)
             })
